@@ -4,6 +4,6 @@ public class NoDiscountStrategy implements DiscountStrategy{
 
     @Override
     public int calculatePrice(int quantity, int unitPrice) {
-        return 0;
+        return quantity * unitPrice;
     }
 }
