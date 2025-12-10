@@ -24,4 +24,4 @@ mvn clean test
 This service is designed as the **Checkout Microservice** component within the larger E-Commerce System Architecture.
 
 ### Architecture Diagram!
-[CheckoutService-Architecture.png](assets/CheckoutService-Architecture.png)
+![CheckoutService-Architecture.png](assets/CheckoutService-Architecture.png)
