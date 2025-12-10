@@ -1,0 +1,19 @@
+title Checkout Service Architecture
+
+// External system
+Ecommerce System [icon: shopping-cart]
+
+// System Boundary for Checkout Service
+Checkout Service Boundary [icon: package, label: "Checkout Service (Spring Boot)"] {
+  REST Controller [icon: server, label: "Checkout Controller"]
+  Domain Logic [icon: code, label: "Checkout Service (Domain Logic)"]
+  Discount Strategy Engine [icon: percent, label: "Discount Strategy Engine"]
+  Watch Repository [icon: database, label: "Watch Repository (In-Memory)"]
+}
+
+// Connections (left-to-right flow)
+REST Controller <> Domain Logic
+Domain Logic > Discount Strategy Engine: apply discount
+Domain Logic <> Watch Repository: read watch data
+Ecommerce System > REST Controller: API request
+Ecommerce System < REST Controller: API resposne
