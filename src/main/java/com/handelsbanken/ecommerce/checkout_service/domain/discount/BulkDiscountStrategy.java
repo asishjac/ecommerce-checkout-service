@@ -11,6 +11,10 @@ public class BulkDiscountStrategy implements DiscountStrategy{
     }
     @Override
     public int calculatePrice(int quantity, int unitPrice) {
-        return 0;
+        if (quantity < requiredQuantity) {
+            return quantity * unitPrice;
+        }
+        int setsQualifiedForDiscount = quantity / requiredQuantity;
+        return setsQualifiedForDiscount * discountedPrice;
     }
 }
