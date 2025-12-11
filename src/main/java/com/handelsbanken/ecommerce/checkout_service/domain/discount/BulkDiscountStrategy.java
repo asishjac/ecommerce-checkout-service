@@ -15,6 +15,8 @@ public class BulkDiscountStrategy implements DiscountStrategy{
             return quantity * unitPrice;
         }
         int setsQualifiedForDiscount = quantity / requiredQuantity;
-        return setsQualifiedForDiscount * discountedPrice;
+        int remainingQuantity = quantity % requiredQuantity;
+
+        return (setsQualifiedForDiscount * discountedPrice) + (remainingQuantity * unitPrice);
     }
 }
