@@ -1,6 +1,6 @@
 package com.handelsbanken.ecommerce.checkout_service.domain.discount;
 
-public class BulkDiscountStrategy implements DiscountStrategy{
+public class BulkDiscountStrategy implements DiscountStrategy {
 
     private final int requiredQuantity;
     private final int discountedPrice;
@@ -9,6 +9,7 @@ public class BulkDiscountStrategy implements DiscountStrategy{
         this.requiredQuantity = requiredQuantity;
         this.discountedPrice = discountedPrice;
     }
+
     @Override
     public int calculatePrice(int quantity, int unitPrice) {
         if (quantity < requiredQuantity) {
@@ -18,5 +19,10 @@ public class BulkDiscountStrategy implements DiscountStrategy{
         int remainingQuantity = quantity % requiredQuantity;
 
         return (setsQualifiedForDiscount * discountedPrice) + (remainingQuantity * unitPrice);
+    }
+
+    @Override
+    public String getDescription() {
+        return requiredQuantity + " for " + discountedPrice;
     }
 }
