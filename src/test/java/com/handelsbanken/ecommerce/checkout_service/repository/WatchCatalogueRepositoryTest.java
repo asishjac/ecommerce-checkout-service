@@ -1,6 +1,6 @@
 package com.handelsbanken.ecommerce.checkout_service.repository;
 
-import com.handelsbanken.ecommerce.checkout_service.entity.WatchCatalogueEntity;
+import com.handelsbanken.ecommerce.checkout_service.domain.entity.WatchCatalogueEntity;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
