@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# H2 file DB (ignore DB files created under ./data/checkoutdb)
+data/checkoutdb.mv.db
+data/checkoutdb.trace.db
