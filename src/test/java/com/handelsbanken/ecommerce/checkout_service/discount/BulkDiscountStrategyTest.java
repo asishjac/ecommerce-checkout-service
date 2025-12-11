@@ -22,4 +22,20 @@ class BulkDiscountStrategyTest {
         int price = strategy.calculatePrice(1, 100);
         assertEquals(100, price);
     }
+
+    @Test
+    void calculatePrice_ShouldApplyDiscountMultipleTimes() {
+        // 3 for 200 -> 6 for 400
+        DiscountStrategy strategy = new BulkDiscountStrategy(3, 200);
+        int price = strategy.calculatePrice(6, 100);
+        assertEquals(400, price);
+    }
+
+    @Test
+    void calculatePrice_ShouldHandleRemainder() {
+        // 3 for 200 -> 4 items (3@200 + 1@100) = 300
+        DiscountStrategy strategy = new BulkDiscountStrategy(3, 200);
+        int price = strategy.calculatePrice(4, 100);
+        assertEquals(300, price);
+    }
 }
