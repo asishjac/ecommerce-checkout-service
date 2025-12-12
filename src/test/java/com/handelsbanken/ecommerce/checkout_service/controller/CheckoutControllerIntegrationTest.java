@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.stream.Stream;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -45,13 +46,6 @@ class CheckoutControllerIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.orderId").isNotEmpty())
                 .andExpect(jsonPath("$.orderStatus").value("COMPLETED"))
-                // Calculation:
-                // 2 Rolex (001) = 200 (No discount req 3) -> Wait, logic: 2*100 = 200
-                // 1 MK (002) = 80
-                // 1 Swatch (003) = 50
-                // 1 Casio (004) = 30
-                // Total = 200 + 80 + 50 + 30 = 360
-                // Total = 200 + 80 + 50 + 30 = 360
                 .andExpect(jsonPath("$.totalCost").value(360.00));
     }
 
@@ -161,5 +155,17 @@ class CheckoutControllerIntegrationTest {
                         "items[0].quantity"
                 )
         );
+    }
+
+    @Test
+    void swaggerUi_ShouldBeAvailable() throws Exception {
+        mockMvc.perform(get("/swagger-ui/index.html"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void apiDocs_ShouldBeAvailable() throws Exception {
+        mockMvc.perform(get("/v3/api-docs"))
+                .andExpect(status().isOk());
     }
 }
