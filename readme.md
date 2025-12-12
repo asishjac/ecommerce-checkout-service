@@ -69,7 +69,7 @@ This service is designed as the **Checkout Microservice** component within the l
 {
   "userId": "user-123",
   "cartId": "cart-456",
-  "products": [
+  "items": [
     { "watchId": "001", "quantity": 3 },
     { "watchId": "002", "quantity": 1 },
     { "watchId": "004", "quantity": 1 }
@@ -80,17 +80,10 @@ This service is designed as the **Checkout Microservice** component within the l
 **Response:**
 ```json
 {
+  "userId": "user-123",
   "orderId": "550e8400-e29b-41d4-a716-446655440000",
-  "status": "COMPLETED",
-  "totalCost": 360,
-  "items": [
-    {
-      "watchId": "001",
-      "watchName": "Rolex",
-      "quantity": 3,
-      "subtotal": 200
-    }
-  ]
+  "orderStatus": "COMPLETED",
+  "totalCost": 360
 }
 ```
 ---
