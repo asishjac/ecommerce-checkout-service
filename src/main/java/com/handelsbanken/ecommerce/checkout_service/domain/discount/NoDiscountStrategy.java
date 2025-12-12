@@ -8,10 +8,4 @@ public class NoDiscountStrategy implements DiscountStrategy {
     public BigDecimal calculatePrice(int quantity, BigDecimal unitPrice) {
         return unitPrice.multiply(BigDecimal.valueOf(quantity));
     }
-
-
-    @Override
-    public String getDescription() {
-        return "";
-    }
 }
