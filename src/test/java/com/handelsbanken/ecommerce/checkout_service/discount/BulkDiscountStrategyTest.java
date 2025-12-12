@@ -23,5 +23,6 @@ class BulkDiscountStrategyTest {
         DiscountStrategy strategy = new BulkDiscountStrategy(3, BigDecimal.valueOf(200));
         BigDecimal price = strategy.calculatePrice(quantity, unitPrice);
         assertEquals(BigDecimal.valueOf(expected), price);
+        assertEquals("3 for 200", strategy.getDescription());
     }
 }
