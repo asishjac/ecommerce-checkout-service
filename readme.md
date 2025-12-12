@@ -2,7 +2,7 @@
 
 A Spring Boot REST API for a simplified e-commerce checkout for a shopping cart(watches). Designed to integrate seamlessly into a microservices architecture.
 
-## 🚀 How to Set Up and Run
+## How to Set Up and Run
 
 ### Prerequisites
 - **Java 21** (LTS)
@@ -16,7 +16,7 @@ The API will be available at `http://localhost:8080`
 
 ### 2. Run Tests
 ```bash
-mvn clean eraserio-architecture-diagram-code
+mvn clean test
 ```
 
 ### 3. API Documentation (Swagger/OpenAPI)
@@ -26,7 +26,7 @@ Once the application is running, interactive API documentation is available at:
 
 ---
 
-## 🏗 Architecture & System Design Fit
+## Architecture & System Design Fit
 
 This service is designed as the **Checkout Microservice** component within the larger E-Commerce System Architecture.
 
@@ -59,7 +59,7 @@ This service is designed as the **Checkout Microservice** component within the l
     - Returns `200 OK` with JSON response
 ---
 
-## 🔌 API Endpoints
+## API Endpoints
 
 ### 1. Checkout
 **Endpoint:** `POST /api/v1/checkout`
@@ -88,7 +88,7 @@ This service is designed as the **Checkout Microservice** component within the l
 ```
 ---
 
-## 🛠 Technical Stack
+## Technical Stack
 
 - **Spring Boot 3.5.8**
 - **Java 21 (LTS)**
@@ -98,7 +98,7 @@ This service is designed as the **Checkout Microservice** component within the l
 
 ---
 
-## 💭 Reflections & Future Development
+## Reflections & Future Development
 
 ### What I Did Not Have Time to Implement
 
@@ -124,7 +124,7 @@ If given more time, I would implement:
 
 ---
 
-## 🧠 Design Decisions
+## Design Decisions
 
 ### 1. Discount Strategy Model: Parsed Strings vs. Relational Tables
 **Choice:** Stored discount rules as strings (e.g., `"3 for 200"`) parsed at runtime
@@ -175,7 +175,7 @@ Example: `[{ "watchId": "001", "qty": 1 }, { "watchId": "001", "qty": 2 }]` → 
 - Clean separation of concerns
 ---
 
-## 🧪 Testing Strategy
+## Testing Strategy
 
 #### Discount Strategy Component (Strict TDD)
 - **Red-Green-Refactor Cycle:** Followed rigorously for the discount engine
@@ -202,7 +202,7 @@ Example: `[{ "watchId": "001", "qty": 1 }, { "watchId": "001", "qty": 2 }]` → 
 - **Integration Tests:** End-to-end API flows with Spring context
 ---
 
-## 💡 Alternate Solution
+## Alternate Solution
 
 For a more type safe approach, I would refactor the Discount Engine with:
 
