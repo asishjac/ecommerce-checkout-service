@@ -1,4 +1,4 @@
-package com.handelsbanken.ecommerce.checkout_service.entity;
+package com.handelsbanken.ecommerce.checkout_service.domain.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -7,6 +7,8 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "watch_catalogue")
@@ -23,7 +25,7 @@ public class WatchCatalogueEntity {
     private String name;
 
     @Column(name = "unit_price", nullable = false)
-    private int unitPrice;
+    private BigDecimal unitPrice;
 
     // "3 for 200" or null
     @Column(name = "discount_expression")

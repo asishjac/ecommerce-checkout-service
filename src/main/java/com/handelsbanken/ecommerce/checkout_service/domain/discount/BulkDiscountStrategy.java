@@ -1,24 +1,29 @@
 package com.handelsbanken.ecommerce.checkout_service.domain.discount;
 
+import java.math.BigDecimal;
+
 public class BulkDiscountStrategy implements DiscountStrategy {
 
     private final int requiredQuantity;
-    private final int discountedPrice;
+    private final BigDecimal discountedPrice;
 
-    public BulkDiscountStrategy(int requiredQuantity, int discountedPrice) {
+    public BulkDiscountStrategy(int requiredQuantity, BigDecimal discountedPrice) {
         this.requiredQuantity = requiredQuantity;
         this.discountedPrice = discountedPrice;
     }
 
     @Override
-    public int calculatePrice(int quantity, int unitPrice) {
+    public BigDecimal calculatePrice(int quantity, BigDecimal unitPrice) {
         if (quantity < requiredQuantity) {
-            return quantity * unitPrice;
+            return unitPrice.multiply(BigDecimal.valueOf(quantity));
         }
         int setsQualifiedForDiscount = quantity / requiredQuantity;
         int remainingQuantity = quantity % requiredQuantity;
 
-        return (setsQualifiedForDiscount * discountedPrice) + (remainingQuantity * unitPrice);
+        BigDecimal discountedTotal = discountedPrice.multiply(BigDecimal.valueOf(setsQualifiedForDiscount));
+        BigDecimal remainingTotal = unitPrice.multiply(BigDecimal.valueOf(remainingQuantity));
+
+        return discountedTotal.add(remainingTotal);
     }
 
     @Override

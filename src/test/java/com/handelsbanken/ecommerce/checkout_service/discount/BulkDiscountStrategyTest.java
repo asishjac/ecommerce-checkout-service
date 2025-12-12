@@ -5,6 +5,8 @@ import com.handelsbanken.ecommerce.checkout_service.domain.discount.DiscountStra
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BulkDiscountStrategyTest {
@@ -16,10 +18,11 @@ class BulkDiscountStrategyTest {
             "6, 100, 400",
             "4, 100, 300"
     })
-    void calculatePrice_ShouldReturnExpectedTotal(int quantity, int unitPrice, int expected) {
+    void calculatePrice_ShouldReturnExpectedTotal(int quantity, BigDecimal unitPrice, int expected) {
         // 3 for 200 bulk discount
-        DiscountStrategy strategy = new BulkDiscountStrategy(3, 200);
-        int price = strategy.calculatePrice(quantity, unitPrice);
-        assertEquals(expected, price);
+        DiscountStrategy strategy = new BulkDiscountStrategy(3, BigDecimal.valueOf(200));
+        BigDecimal price = strategy.calculatePrice(quantity, unitPrice);
+        assertEquals(BigDecimal.valueOf(expected), price);
+        assertEquals("3 for 200", strategy.getDescription());
     }
 }

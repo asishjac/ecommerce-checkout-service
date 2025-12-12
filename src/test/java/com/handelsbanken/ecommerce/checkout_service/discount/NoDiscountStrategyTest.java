@@ -4,6 +4,8 @@ import com.handelsbanken.ecommerce.checkout_service.domain.discount.DiscountStra
 import com.handelsbanken.ecommerce.checkout_service.domain.discount.NoDiscountStrategy;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class NoDiscountStrategyTest {
@@ -11,7 +13,7 @@ class NoDiscountStrategyTest {
     @Test
     void calculatePrice_NoDiscountApplied() {
         DiscountStrategy strategy = new NoDiscountStrategy();
-        int price = strategy.calculatePrice(3, 100);
-        assertEquals(300, price);
+        BigDecimal price = strategy.calculatePrice(3, BigDecimal.valueOf(100));
+        assertEquals(BigDecimal.valueOf(300), price);
     }
 }

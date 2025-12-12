@@ -1,7 +1,9 @@
 package com.handelsbanken.ecommerce.checkout_service.domain.discount;
 
+import java.math.BigDecimal;
+
 public interface DiscountStrategy {
-    int calculatePrice(int quantity, int unitPrice);
+    BigDecimal calculatePrice(int quantity, BigDecimal unitPrice);
 
     /**
      * Returns a human-readable description of the discount.
