@@ -44,6 +44,7 @@ public class CheckoutService {
                     .orElseThrow(() -> new IllegalArgumentException("Watch with ID " + watchId + " not found"));
             WatchCatalogue watchCatalogue = watchCatalogueMapper.toDomain(watchCatalogueEntity);
             BigDecimal itemCost = watchCatalogue.discountStrategy().calculatePrice(quantity, watchCatalogue.unitPrice());
+            log.info("Calculated item cost for watchId: {}: {} , Discount Strategy : {}", watchId, itemCost,watchCatalogue.discountStrategy().getDescription());
             totalCost = totalCost.add(itemCost);
         }
 
