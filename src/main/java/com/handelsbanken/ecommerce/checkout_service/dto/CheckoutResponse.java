@@ -3,6 +3,8 @@ package com.handelsbanken.ecommerce.checkout_service.dto;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
+import java.math.BigDecimal;
+
 public record CheckoutResponse(
 
         @NotBlank(message = "User ID is required")
@@ -15,5 +17,5 @@ public record CheckoutResponse(
         String orderStatus,
 
         @Min(0)
-        int totalCost
+        BigDecimal totalCost
 ) {}

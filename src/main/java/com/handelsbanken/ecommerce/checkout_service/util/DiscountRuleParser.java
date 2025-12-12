@@ -5,6 +5,7 @@ import com.handelsbanken.ecommerce.checkout_service.domain.discount.DiscountStra
 import com.handelsbanken.ecommerce.checkout_service.domain.discount.NoDiscountStrategy;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,8 +23,8 @@ public class DiscountRuleParser {
         Matcher matcher = BULK_PATTERN.matcher(expression.trim());
         if (matcher.matches()) {
             int quantity = Integer.parseInt(matcher.group(1));
-            int price = Integer.parseInt(matcher.group(2));
-            if (quantity <= 0 || price <= 0) {
+            BigDecimal price = new BigDecimal(matcher.group(2));
+            if (quantity <= 0 || (price.compareTo(BigDecimal.ZERO) <= 0)) {
                 throw new IllegalArgumentException("Quantity or price must be positive: " + expression);
             }
             return new BulkDiscountStrategy(quantity, price);

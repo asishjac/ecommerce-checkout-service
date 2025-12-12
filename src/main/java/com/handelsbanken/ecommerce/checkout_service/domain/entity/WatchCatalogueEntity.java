@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "watch_catalogue")
 @AllArgsConstructor
@@ -23,7 +25,7 @@ public class WatchCatalogueEntity {
     private String name;
 
     @Column(name = "unit_price", nullable = false)
-    private int unitPrice;
+    private BigDecimal unitPrice;
 
     // "3 for 200" or null
     @Column(name = "discount_expression")

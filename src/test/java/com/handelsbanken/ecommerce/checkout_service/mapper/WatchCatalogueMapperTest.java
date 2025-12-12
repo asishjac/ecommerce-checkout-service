@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.mockito.Mockito.*;
@@ -25,11 +27,11 @@ class WatchCatalogueMapperTest {
         WatchCatalogueEntity entity = new WatchCatalogueEntity();
         entity.setId("001");
         entity.setName("Swatch");
-        entity.setUnitPrice(10000);
-        entity.setDiscountExpression("3 for 2");
+        entity.setUnitPrice(BigDecimal.valueOf(10000));
+        entity.setDiscountExpression("3 for 20000");
 
-        DiscountStrategy expectedStrategy = new BulkDiscountStrategy(3, 2);
-        when(discountRuleParserMock.parse("3 for 2")).thenReturn(expectedStrategy);
+        DiscountStrategy expectedStrategy = new BulkDiscountStrategy(3, BigDecimal.valueOf(20000));
+        when(discountRuleParserMock.parse("3 for 20000")).thenReturn(expectedStrategy);
 
         WatchCatalogue domain = watchCatalogueMapper.toDomain(entity);
 
@@ -38,7 +40,7 @@ class WatchCatalogueMapperTest {
         assertEquals(entity.getUnitPrice(), domain.unitPrice());
         assertSame(expectedStrategy, domain.discountStrategy());
 
-        verify(discountRuleParserMock, times(1)).parse("3 for 2");
+        verify(discountRuleParserMock, times(1)).parse("3 for 20000");
     }
 
     @Test
@@ -46,7 +48,7 @@ class WatchCatalogueMapperTest {
         WatchCatalogueEntity entity = new WatchCatalogueEntity();
         entity.setId("001");
         entity.setName("Swatch");
-        entity.setUnitPrice(10000);
+        entity.setUnitPrice(BigDecimal.valueOf(10000));
         entity.setDiscountExpression("");
 
         DiscountStrategy expectedStrategy = new NoDiscountStrategy();
