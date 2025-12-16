@@ -242,3 +242,28 @@ private DiscountStrategy selectStrategy(WatchCatalogue watchCatalogue) {
 - Type-safe validation
 - No regex parsing errors
 ---
+
+## Deployment (AWS EKS & CI/CD)
+
+This application is fully containerized and deployed to **AWS Elastic Kubernetes Service (EKS)**.
+
+### Live Demo (Swagger UI)
+**URL:** [http://adc47b00b6ef04742993d004a8a7a7e6-1911570543.eu-north-1.elb.amazonaws.com/swagger-ui/index.html](http://adc47b00b6ef04742993d004a8a7a7e6-1911570543.eu-north-1.elb.amazonaws.com/swagger-ui/index.html)
+
+### Infrastructure Setup
+- **Cluster:** `checkout-showcase` (2 Nodes, `t3.small`) in `eu-north-1` (Stockholm)
+- **Container Registry:** AWS ECR (`checkout-service`)
+- **Configuration:** Runs with `SPRING_PROFILES_ACTIVE=prod` (In-Memory DB + Secrets)
+- **Orchestration:** Kubernetes Deployment (2 Replicas for High Availability)
+- **Traffic:** AWS Classic Load Balancer (ELB)
+
+### CI/CD Pipeline (GitHub Actions)
+The project utilizes a "Zero-Touch" deployment pipeline:
+1.  **Trigger:** Pushing to `feature/aws-deploy` branch
+2.  **Build:** Maven compiles Java 21 code
+3.  **Containerize:** Docker builds image using `eclipse-temurin:21-jre-alpine`
+4.  **Publish:** Pushes Docker image to AWS ECR
+5.  **Deploy:** Automatically updates Kubernetes Manifests and rolls out the new version
+
+### 🔐 Security
+- **Database Secrets:** Passwords are **not** stored in git. They are injected at runtime via Kubernetes Secrets (`db-secret`).
