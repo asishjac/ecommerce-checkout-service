@@ -60,4 +60,4 @@ jobs:
           kubectl apply -f kubernetes/service.yaml
           
           # Force restart to pick up new image
-          kubectl rollout restart deployment/checkout-service-api
+          kubectl rollout restart deployment/checkout-service
