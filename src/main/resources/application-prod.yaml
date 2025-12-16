@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    # OVERRIDE: Use In-Memory DB (instead of File)
+    url: jdbc:h2:mem:prod_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+
+    # OVERRIDE: Inject Password from Kubernetes Secret
+    password: ${DB_PASSWORD}
+
+  h2:
+    console:
+      enabled: false  # Disable H2 Console in Production
+
+# Keep remaining settings (Driver, Username, JPA) from default application.yml
+
+logging:
+  pattern:
+    console: "%d{HH:mm:ss} [PROD] %m%n"
